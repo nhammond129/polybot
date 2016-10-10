@@ -1,0 +1,31 @@
+#!/usr/bin/python
+import discord
+import asyncio
+import os
+
+import polybot
+
+## Initialize interfaces
+client=polybot.Bot()
+
+## Define event triggers
+@client.event
+async def on_ready():
+        client.logger.info("Logged in as:\n\t%s\n\t%s"%(client.user.name,client.user.id))
+
+@client.event
+async def on_member_join(member):
+        server = member.server
+        fmt = 'Welcome {0.mention} to {1.name}!'
+        await client.send_message(server, fmt.format(member,server))
+
+@client.event
+async def on_message(message):
+    await client.message_handler(message)
+
+if __name__=="__main__":
+    mydir=os.path.dirname(os.path.realpath(__file__))
+    with open(mydir+"/.token","r") as f:
+        t=f.read()[:-1]
+        print("Token ending in: \"%s\""%(t[-8:]))
+        client.run(t)

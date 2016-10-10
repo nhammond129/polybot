@@ -1,0 +1,8 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.dat
+data/*.dat
+data/logs/*
+data/users/*
+.token
+*.swp
