@@ -19,6 +19,15 @@ async def digest(message,bot):
             )
     if not msgcount:
         msgcount=0
+
+    lgstMC=bot.configPO.read("largest message count")
+    if not lgstMC:
+        lgstMC=(message.author.name,msgcount+1)
+    else:
+        if lgstMC[1]<(msgcount+1):
+            lgstMC=(message.author.name,msgcount+1)
+    bot.configPO.write("largest message count",lgstMC)
+
     bot.userDB.write_userdata(
             message.author.id,
             "message count",

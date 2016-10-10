@@ -52,7 +52,12 @@ async def digest(message,bot):
                         )
                     )
             if isMatch(tokens[1],"top"):
-                pass
+                await bot.send_message(
+                        message.channel,
+                        "%s has shitposted the most at %d."%bot.configPO.read(
+                            "largest message count"
+                            )
+                        )
             elif isMatch(tokens[1],"bottom"):
                 pass
         elif isMatch(tokens[0],"extensions"):
