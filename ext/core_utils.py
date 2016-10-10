@@ -37,7 +37,7 @@ async def digest(message,bot):
                 message.channel,
                 "I am in the middle of a lot of "
                 "refactoring, I'm somewhat memeless "
-                "and I know it's scary, but I know "
+                "and I know it's scary, but I'm sure "
                 "we'll get through this together :)"
                 )
         elif isMatch(tokens[0],"msgcount"):
