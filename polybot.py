@@ -9,12 +9,12 @@ import time
 import glob
 import importlib
 from datetime import datetime
+from datetime import timedelta
 import logging
 
 class Bot(discord.Client):
     def __init__(self,
             commandPrefix=['~','!','#','/'],
-            startTime=time.time(),
             **options
             ):
         super().__init__(**options)
@@ -58,7 +58,7 @@ class Bot(discord.Client):
             await ext.digest(message,self)
 
     def getUptime(self):
-        return str(datetime.timedelta(seconds=time.time()-self.startTime))
+        return str(timedelta(seconds=(time.time()-self.startTime)))
 
     def load_extension(self,extname):
         if extname in self.extensions:

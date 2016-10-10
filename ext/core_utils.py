@@ -28,6 +28,7 @@ async def digest(message,bot):
                 "pong"
                 )
         elif isMatch(tokens[0],"uptime"):
+            bot.logger.info("DEBUG: "+bot.getUptime())
             await bot.send_message(
                 message.channel,
                 "I've been up for %s"%bot.getUptime()
