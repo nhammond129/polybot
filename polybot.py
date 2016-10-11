@@ -48,6 +48,8 @@ class Bot(discord.Client):
         self.gameDB=utils.PersistenceObject("gamedata.dat")
         self.configPO=utils.PersistenceObject("config.dat")
 
+        self.tempvars={}
+
         self.commandPrefix=commandPrefix
 
         self.extensions={}
