@@ -36,10 +36,7 @@ async def digest(message,bot):
         elif isMatch(tokens[0],"help") or isMatch(tokens[0],"helb"):
             await bot.send_message(
                 message.channel,
-                "I am in the middle of a lot of "
-                "refactoring, I'm somewhat memeless "
-                "and I know it's scary, but I'm sure "
-                "we'll get through this together :)"
+                "go fuck yourself"
                 )
         elif isMatch(tokens[0],"msgcount"):
             if len(tokens)<2:

@@ -39,6 +39,8 @@ async def check_amadeus_down():
         if(str(AmadeusUser.status)=="offline"):
             await client.send_message(BirchUser,"bot is kil plz fix")
             adj=(adj+adj/2)
+            if adj>10800:
+                adj=10800
         else:
             adj=3600
         await asyncio.sleep(3600+adj)
