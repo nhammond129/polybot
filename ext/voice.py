@@ -17,7 +17,23 @@ async def digest(message,bot):
             if isMatch(tokens[1],"help"):
                 await bot.send_message(
                         message.channel,
-                        "jc rr2 mycube gems pain bustin kurisutina mybrand bees?"
+                        "jc rr2 mycube gems pain bustin kurisutina mybrand bees?\n"
+                        "donttouchthat tutturu~ succ"
+                        )
+            elif isMatch(tokens[1],"succ"):
+                if bot.is_voice_connected(
+                        message.channel.server
+                        ):
+                    pass
+                else:
+                    await bot.join_voice_channel(
+                        message.author.voice_channel
+                        )
+                vc = bot.voice_client_in(
+                        message.channel.server
+                        )
+                player = await vc.create_ytdl_player(
+                        "https://www.youtube.com/watch?v=fPNdWnwuBDI"
                         )
             elif isMatch(tokens[1],"jc"):
                 if bot.is_voice_connected(
@@ -33,6 +49,38 @@ async def digest(message,bot):
                         )
                 player = await vc.create_ytdl_player(
                         "https://www.youtube.com/watch?v=ggKeB9OOkRY"
+                        )
+                player.start()
+            elif isMatch(tokens[1],"tutturu~"):
+                if bot.is_voice_connected(
+                        message.channel.server
+                        ):
+                    pass
+                else:
+                    await bot.join_voice_channel(
+                        message.author.voice_channel
+                        )
+                vc = bot.voice_client_in(
+                        message.channel.server
+                        )
+                player = await vc.create_ytdl_player(
+                        "https://www.youtube.com/watch?v=HkGNeN0LGOE"
+                        )
+                player.start()
+            elif isMatch(tokens[1],"donttouchthat"):
+                if bot.is_voice_connected(
+                        message.channel.server
+                        ):
+                    pass
+                else:
+                    await bot.join_voice_channel(
+                        message.author.voice_channel
+                        )
+                vc = bot.voice_client_in(
+                        message.channel.server
+                        )
+                player = await vc.create_ytdl_player(
+                        "https://www.youtube.com/watch?v=7_h0uAdFBYc"
                         )
                 player.start()
             elif isMatch(tokens[1],"bees?"):
