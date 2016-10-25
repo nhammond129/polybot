@@ -18,8 +18,24 @@ async def digest(message,bot):
                 await bot.send_message(
                         message.channel,
                         "jc rr2 mycube gems pain bustin kurisutina mybrand bees?\n"
-                        "donttouchthat tutturu~ succ"
+                        "donttouchthat tutturu~ succ tellmeaboutthoseconquerorshouldersagain"
                         )
+            elif isMatch(tokens[1],"tellmeaboutthoseconquerorshouldersagain"):
+                if bot.is_voice_connected(
+                        message.channel.server
+                        ):
+                    pass
+                else:
+                    await bot.join_voice_channel(
+                        message.author.voice_channel
+                        )
+                vc = bot.voice_client_in(
+                        message.channel.server
+                        )
+                player = await vc.create_ytdl_player(
+                        "https://www.youtube.com/watch?v=gKqoZkp9bMU"
+                        )
+                player.start()
             elif isMatch(tokens[1],"succ"):
                 if bot.is_voice_connected(
                         message.channel.server
@@ -35,6 +51,7 @@ async def digest(message,bot):
                 player = await vc.create_ytdl_player(
                         "https://www.youtube.com/watch?v=fPNdWnwuBDI"
                         )
+                player.start()
             elif isMatch(tokens[1],"jc"):
                 if bot.is_voice_connected(
                         message.channel.server
