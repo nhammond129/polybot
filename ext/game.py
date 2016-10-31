@@ -3,6 +3,21 @@ import asyncio
 from os import path
 sys.path.append(path.dirname(path.dirname(path.abspath(__file__))).replace("ext/",""))
 from utils import *
+from .lib import gameclasses
+
+async def getResponse(self,bot,message,responsecheck):
+    uid=message.author.id
+    answer = await bot.wait_for_message(
+            timeout=30.0,
+            author=message.author,
+            check=responsecheck
+            )
+    if answer is None:
+        await bot.send_message(
+                message.channel,
+                "Sorry, I got bored waiting. You'll have to be faster next time."
+                )
+    return answer
 
 class Game:
     def __init__(self):
@@ -64,7 +79,7 @@ class Game:
 SG=Game()
 
 async def digest(message,bot):
-    if not message.channel.name=="botdev":
+    if not (message.channel.name=="botdev" or message.channel.is_private):
         return
     if message.content[0] in bot.commandPrefix:
         user=message.author.id

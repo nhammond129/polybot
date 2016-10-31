@@ -4,14 +4,22 @@ sys.path.append(path.dirname(path.dirname(path.abspath(__file__))).replace("ext/
 from utils import *
 
 async def digest(message,bot):
-    bot.logger.info(
-            "#%s on %s\n  [%s]: %s"%(
-                message.channel.name,
-                message.channel.server.name,
-                message.author.name,
-                message.content
+    if message.channel.is_private:
+        bot.logger.info(
+                "(private)\n [%s]: %s"%(
+                    message.author.name,
+                    message.content
+                    )
                 )
-            )
+    else:
+        bot.logger.info(
+                    "#%s on %s\n  [%s]: %s"%(
+                    message.channel.name,
+                    message.channel.server.name,
+                    message.author.name,
+                    message.content
+                    )
+                )
 
     msgcount=bot.userDB.read_userdata(
             message.author.id,
