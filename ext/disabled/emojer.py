@@ -10,17 +10,17 @@ def emjDist(token,emjstr):
     tot_ratio=0
     tkns=0
     for i in emjstr.replace(":","").split("_"):
-        tot_ratio+=fuzz.ratio(token,i)
+        tot_ratio+=fuzz.ratio(token.lower(),i.lower())
         tkns+=1
     return tot_ratio/tkns
 
 async def digest(message,bot):
-
+    return
     elist=list(emoji.unicode_codes.EMOJI_UNICODE.keys())
     possible=[]
     for token in message.content.split(" "):
         elist.sort(key=lambda x: emjDist(token,x))
-        if emjDist(token,elist[-1])<70:
+        if emjDist(token,elist[-1])<90:
             continue
         possible.append(
                 elist[-1]

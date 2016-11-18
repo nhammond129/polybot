@@ -3,6 +3,16 @@ from os import path
 sys.path.append(path.dirname(path.dirname(path.abspath(__file__))).replace("ext/",""))
 from utils import *
 
+HELP="""\
+`ext.channel`
+```bash
+channel purge
+    Purge the channel -- owner only
+channel createdat
+    See when the channel was created
+```
+"""
+
 async def digest(message,bot):
     if message.content[0] in bot.commandPrefix:
         tokens=tokenize(message)

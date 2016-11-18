@@ -5,6 +5,14 @@ sys.path.append(path.dirname(path.dirname(path.abspath(__file__))).replace("ext/
 from utils import *
 from .lib import gameclasses
 
+HELP="""\
+`ext.game`
+```bash
+Hey, look away.
+```
+"""
+
+
 async def getResponse(self,bot,message,responsecheck):
     uid=message.author.id
     answer = await bot.wait_for_message(

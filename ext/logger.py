@@ -3,6 +3,15 @@ from os import path
 sys.path.append(path.dirname(path.dirname(path.abspath(__file__))).replace("ext/",""))
 from utils import *
 
+HELP="""\
+`ext.logger`
+```bash
+Just a logging module.
+No commands here.
+```
+"""
+
+
 async def digest(message,bot):
     if message.channel.is_private:
         bot.logger.info(

@@ -3,6 +3,16 @@ from os import path,system
 sys.path.append(path.dirname(path.dirname(path.abspath(__file__))).replace("ext/",""))
 from utils import *
 
+HELP="""\
+`ext.owner_only`
+```bash
+reload
+shell
+purge
+sudoku
+```
+"""
+
 async def digest(message,bot):
     if isOwner(message) and message.content[0] in bot.commandPrefix:
         tokens=tokenize(message)

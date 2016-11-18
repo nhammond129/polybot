@@ -5,6 +5,16 @@ from os import path
 sys.path.append(path.dirname(path.dirname(path.abspath(__file__))).replace("ext/",""))
 from utils import *
 
+HELP="""\
+`ext.voice`
+```bash
+voice $FILE
+    Plays the appropriate voice file.
+voice help
+voice list
+    List the possible voice files.
+```
+"""
 if not discord.opus.is_loaded():
     discord.opus.load_opus('opus')
 
@@ -14,12 +24,12 @@ async def digest(message,bot):
         tokens[0]=tokens[0][1:]
         print(tokens)
         if isMatch(tokens[0],"voice"):
-            if isMatch(tokens[1],"help"):
+            if isMatch(tokens[1],"help") or isMatch(tokens[1],"list"):
                 await bot.send_message(
                         message.channel,
                         "jc rr2 mycube gems pain bustin kurisutina mybrand bees?\n"
-                        "donttouchthat tutturu~ succ tellmeaboutthoseconquerorshouldersagain"
-                        "stop"
+                        "donttouchthat tutturu~ succ stop snout\n"
+                        "tellmeaboutthoseconquerorshouldersagain"
                         )
             elif isMatch(tokens[1],"tellmeaboutthoseconquerorshouldersagain"):
                 if bot.is_voice_connected(
@@ -227,6 +237,22 @@ async def digest(message,bot):
                         )
                 player = await vc.create_ytdl_player(
                         "https://www.youtube.com/watch?v=ybcS7CP4Om0"
+                        )
+                player.start()
+            elif isMatch(tokens[1],"snout"):
+                if bot.is_voice_connected(
+                        message.channel.server
+                        ):
+                    pass
+                else:
+                    await bot.join_voice_channel(
+                        message.author.voice_channel
+                        )
+                vc = bot.voice_client_in(
+                        message.channel.server
+                        )
+                player = await vc.create_ytdl_player(
+                        "https://www.youtube.com/watch?v=dCO8fj_DQQo"
                         )
                 player.start()
             elif isMatch(tokens[1],"gems"):

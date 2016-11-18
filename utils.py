@@ -1,6 +1,7 @@
 import shelve
 import os
 import logging
+import shlex
 
 class InvalidFileIO(Exception):
     pass
@@ -44,7 +45,7 @@ class UserDB():
             db.sync()
 
 def tokenize(message):
-    return message.content.split(" ")
+    return shlex.split(message.content)
 
 def isMatch(s1,s2):
     return s1.lower() == s2.lower()

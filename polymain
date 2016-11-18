@@ -34,16 +34,16 @@ async def check_amadeus_down():
             break
     BirchUser=AmadeusHome.get_member_named("QwertyThePie#1615")
     AmadeusUser=AmadeusHome.get_member_named("Amadeus#7338")
-    adj=3600
+    adj=0
     while not client.is_closed:
         if(str(AmadeusUser.status)=="offline"):
             await client.send_message(BirchUser,"bot is kil plz fix")
-            adj=(adj+adj/2)
+            adj=adj+3600
             if adj>10800:
                 adj=10800
         else:
-            adj=3600
-        await asyncio.sleep(3600+adj)
+            adj=0
+        await asyncio.sleep(600+adj)
 
 if __name__=="__main__":
     mydir=os.path.dirname(os.path.realpath(__file__))
