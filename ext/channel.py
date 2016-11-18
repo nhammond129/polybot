@@ -8,6 +8,7 @@ HELP="""\
 ```bash
 channel purge
     Purge the channel -- owner only
+    NOTE: only works if bot is a mod
 channel createdat
     See when the channel was created
 ```
@@ -33,7 +34,7 @@ async def digest(message,bot):
                         msgtmp,
                         "Channel purged!"
                         )
-            elif isMatch(tokens[1],"createdat"):
+            elif isMatch(tokens[1],"created-at"):
                 await bot.send_message(
                         message.channel,
                         "#%s created at %s"%(

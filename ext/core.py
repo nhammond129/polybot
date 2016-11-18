@@ -4,7 +4,7 @@ sys.path.append(path.dirname(path.dirname(path.abspath(__file__))).replace("ext/
 from utils import *
 
 HELP="""\
-`ext.core_utils`
+`ext.core`
 ```bash
 help $EXTENSION
     Get the help message for $EXTENSION
