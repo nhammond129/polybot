@@ -18,7 +18,7 @@ msgcount
     See how many times Polybot has seen you shitpost
 msgcount top
     See who Polybot has seen shitpost the most
-extensions
+extensions|ext
     Get a list of loaded extensions
 ```
 """
@@ -91,7 +91,7 @@ async def digest(message,bot):
                         )
             elif isMatch(tokens[1],"bottom"):
                 pass
-        elif isMatch(tokens[0],"extensions"):
+        elif isMatch(tokens[0],('extensions','ext')):
             await bot.send_message(
                 message.channel,
                 "```%s```"%("\n".join(bot.extensions.keys()))

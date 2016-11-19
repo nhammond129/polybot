@@ -48,7 +48,10 @@ def tokenize(message):
     return shlex.split(message.content)
 
 def isMatch(s1,s2):
-    return s1.lower() == s2.lower()
+    if type(s2) in (list,tuple):
+        return s1.lower() in [k.lower() for k in s2]
+    else:
+        return s1.lower() == s2.lower()
 
 def isOwner(message):
     return message.author.id=="152273482846175234"

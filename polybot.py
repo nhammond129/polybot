@@ -14,7 +14,7 @@ import logging
 
 class Bot(discord.Client):
     def __init__(self,
-            commandPrefix=['~','!','#','/'],
+            commandPrefix=['~','!','#','/',':','-','?',';','|','.'],
             **options
             ):
         super().__init__(**options)
@@ -46,6 +46,7 @@ class Bot(discord.Client):
 
         self.userDB=utils.UserDB()
         self.gameDB=utils.PersistenceObject("gamedata.dat")
+        self.fridgeDB=utils.PersistenceObject("fridge.dat")
         self.configPO=utils.PersistenceObject("config.dat")
 
         self.tempvars={}
