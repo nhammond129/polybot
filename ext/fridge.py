@@ -20,7 +20,6 @@ fridge remove|take $FRIDGE $ITEM
     Remove $ITEM from $FRIDGE
 fridge clear|purge
     Remove all items from $FRIDGE
-    NOT IMPLEMENTED
 ```
 """
 
@@ -89,6 +88,35 @@ async def digest(message,bot):
                         " ".join(['`%s`'%k for k in userfridges.keys()])
                         )
                 return
+            elif isMatch(tokens[1],('purge','clear')):
+                if isMatch(tokens[2],'server'):
+                    thisfridge=serverfridge
+                elif isMatch(tokens[2],'channel'):
+                    thisfridge=channelfridge
+                else:
+                    try:
+                        if tokens[2] in userfridges:
+                            thisfridge=userfridges[tokens[2]]
+                        else:
+                            thisfridge=Fridge(name=tokens[2])
+                        whichUserFridge=tokens[2]
+                    except:
+                        if "default" in userfridges:
+                            thisfridge=userfridges['default']
+                        else:
+                            thisfridge=Fridge(name='default')
+                        whichUserFridge="default"
+                if not len(thisfridge.items):
+                    await bot.send_message(
+                            message.channel,
+                            "This fridge doesn't have anything in it yet."
+                            )
+                    return
+                thisfridge.purge()
+                await bot.send_message(
+                        message.channel,
+                        "`%s` is now empty."%thisfridge.name
+                        )
             elif isMatch(tokens[1],('view','see')):
                 if isMatch(tokens[2],'server'):
                     thisfridge=serverfridge
@@ -119,7 +147,7 @@ async def digest(message,bot):
                         "`%s` contents:\n"%(thisfridge.name,)+(
                         " ".join(
                         [   "`"+
-                                (("%dx "%(counts[j]))*(counts[j]>1))
+                                (("%dx "%(counts[j])))
                             +"%s`"%(j)
                             for j in thisfridge.getCounts() ]
                         )))
@@ -165,7 +193,7 @@ async def digest(message,bot):
                             "`%s` now contains:\n"%(thisfridge.name,)+(
                             " ".join(
                             [   "`"+
-                                    (("%dx "%(counts[j]))*(counts[j]>1))
+                                    (("%dx "%(counts[j])))
                                 +"%s`"%(j)
                                 for j in thisfridge.getCounts() ]
                             )))
@@ -207,7 +235,7 @@ async def digest(message,bot):
                             "`%s` now contains:\n"%(thisfridge.name,)+(
                             " ".join(
                             [   "`"+
-                                    (("%dx "%(counts[j]))*(counts[j]>0))
+                                    (("%dx "%(counts[j])))
                                 +"%s`"%(j)
                                 for j in thisfridge.getCounts() ]
                             )))
