@@ -32,6 +32,22 @@ async def digest(message,bot):
                         "tellmeaboutthoseconquerorshouldersagain\n"
                         "YOUFACEJARRAXUS"
                         )
+            elif isMatch(tokens[1],"ootay"):
+                if bot.is_voice_connected(
+                        message.channel.server
+                        ):
+                    pass
+                else:
+                    await bot.join_voice_channel(
+                        message.author.voice_channel
+                        )
+                vc = bot.voice_client_in(
+                        message.channel.server
+                        )
+                player = await vc.create_ytdl_player(
+                        "https://www.youtube.com/watch?v=baVB07i2rsI"
+                        )
+                player.start()
             elif isMatch(tokens[1],"YOUFACEJARRAXUS"):
                 if bot.is_voice_connected(
                         message.channel.server
