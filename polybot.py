@@ -89,7 +89,7 @@ class Bot(discord.Client):
         exts = glob.glob(dir_path+"/ext/*.py")
         clean = []
         for ext in exts:
-            ext = ext.replace("/", "\\") # Linux fix (hacky)
+            ext = ext.replace("/", "\\") # Linux fix (gross)
             clean.append("ext."+ext.split("\\")[-1].replace(".py",""))
         return clean
 

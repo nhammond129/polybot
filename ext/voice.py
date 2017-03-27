@@ -17,6 +17,14 @@ voice list
 """
 if not discord.opus.is_loaded():
     discord.opus.load_opus('opus')
+VOX={
+    "gonnafun": "/home/nullspeaker/python/polybot/gonnafun.mp3",
+    "same": "/home/nullspeaker/python/polybot/same.mp3",
+    "simplememer": "/home/nullspeaker/python/polybot/simplememer.mp3",
+    "whatsinthebox": "/home/nullspeaker/python/polybot/WHATSINTHEBOX.mp3",
+    "samecanyousee": "/home/nullspeaker/python/polybot/ohsamecanyousee.mp3",
+    "moardots": "/home/nullspeaker/python/polybot/moredots.mp3"
+    }
 
 async def digest(message,bot):
     if message.content[0] in bot.commandPrefix:
@@ -30,8 +38,40 @@ async def digest(message,bot):
                         "jc rr2 mycube gems pain bustin kurisutina mybrand bees?\n"
                         "donttouchthat tutturu~ succ stop snout\n"
                         "tellmeaboutthoseconquerorshouldersagain\n"
-                        "YOUFACEJARRAXUS"
+                        "YOUFACEJARRAXUS gameoverman whatsinthebox\n"
+                        "same gonnafun simplememer samecanyousee\n"
+                        "moarDOTs"
                         )
+            elif isMatch(tokens[1],"gameoverman"):
+                if bot.is_voice_connected(
+                        message.channel.server
+                        ):
+                    pass
+                else:
+                    await bot.join_voice_channel(
+                        message.author.voice_channel
+                        )
+                vc = bot.voice_client_in(
+                        message.channel.server
+                        )
+                player = await vc.create_ytdl_player(
+                        "https://www.youtube.com/watch?v=u2ycDWywGls"
+                        )
+                player.start()
+            elif tokens[1].lower() in VOX.keys():
+                if bot.is_voice_connected(
+                        message.channel.server
+                        ):
+                    pass
+                else:
+                    await bot.join_voice_channel(
+                            message.author.voice_channel
+                            )
+                vc = bot.voice_client_in(
+                        message.channel.server
+                        )
+                player = vc.create_ffmpeg_player(VOX[tokens[1].lower()])
+                player.start()
             elif isMatch(tokens[1],"YOUFACEJARRAXUS"):
                 if bot.is_voice_connected(
                         message.channel.server

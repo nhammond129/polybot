@@ -46,17 +46,34 @@ async def digest(message,bot):
                         message.channel,
                         hlpmsg
                         )
+        elif isMatch(tokens[0],"whois"):
+            target = message.server.get_member_named(tokens[1])
+            await bot.send_message(
+                message.channel,
+                "%s,\n"
+                "Their ID is `%s` \n"
+                "Their discriminator is `%s` \n"
+                "Joined at `%s` \n"
+                "Is %sa bot."%(
+                    target.name,
+                    target.id,
+                    target.discriminator,
+                    str(target.joined_at),
+                    "not "*(1-target.bot)
+                    )
+                )
         elif isMatch(tokens[0],"whoami"):
-            print("someone")
             await bot.send_message(
                 message.channel,
                 "%s,\n"
                 "Your ID is `%s` \n"
                 "Your discriminator is `%s` \n"
+                "Joined at `%s` \n"
                 "You are %sa bot."%(
                     message.author.name,
                     message.author.id,
                     message.author.discriminator,
+                    str(message.author.joined_at),
                     "not "*(1-message.author.bot)
                     )
                 )

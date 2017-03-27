@@ -9,6 +9,7 @@ HELP="""\
 `ext.game`
 ```bash
 Hey, look away.
+This shit is still in development, yo.
 ```
 """
 
@@ -16,7 +17,7 @@ Hey, look away.
 async def getResponse(self,bot,message,responsecheck):
     uid=message.author.id
     answer = await bot.wait_for_message(
-            timeout=30.0,
+            timeout=15.0,
             author=message.author,
             check=responsecheck
             )
@@ -26,6 +27,8 @@ async def getResponse(self,bot,message,responsecheck):
                 "Sorry, I got bored waiting. You'll have to be faster next time."
                 )
     return answer
+
+
 
 class Game:
     def __init__(self):
@@ -50,7 +53,7 @@ class Game:
         user=message.author.id
         def class_check(m):
             return (
-                    m.content.split(" ")[0].lower() in
+                    m.content.lower() in
                     ["fighter","mage","cleric","bard"]
                 )
         classvar = self.getvar(bot,user,'class')
