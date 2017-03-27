@@ -10,9 +10,8 @@ Just a logging module.
 No commands here.
 ```
 """
-
-
 async def digest(message,bot):
+    # Logging Begins
     if message.channel.is_private:
         bot.logger.info(
                 "(private)\n [%s]: %s"%(
@@ -29,25 +28,17 @@ async def digest(message,bot):
                     message.content
                     )
                 )
-
-    msgcount=bot.userDB.read_userdata(
+    # Logging ends. Put the rest of this in another module?
+    said=bot.userDB.read_userdata(
             message.author.id,
-            "message count"
+            "said"
             )
-    if not msgcount:
-        msgcount=0
-
-    lgstMC=bot.configPO.read("largest message count")
-    if not lgstMC:
-        lgstMC=(message.author.name,msgcount+1)
-    else:
-        if lgstMC[1]<(msgcount+1):
-            lgstMC=(message.author.name,msgcount+1)
-    bot.configPO.write("largest message count",lgstMC)
-
+    if not said:
+        said=[]
+    said.append(message.content)
     bot.userDB.write_userdata(
             message.author.id,
-            "message count",
-            msgcount+1
+            "said",
+            said
             )
 

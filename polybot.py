@@ -12,6 +12,9 @@ from datetime import datetime
 from datetime import timedelta
 import logging
 
+# Fix relative paths
+sys.path.append(os.path.realpath('..'))
+
 class Bot(discord.Client):
     def __init__(self,
             commandPrefix=['~','!','#','/',':','-','?',';','|','.'],
@@ -21,13 +24,11 @@ class Bot(discord.Client):
 
         self.startTime=time.time()
 
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-
         self.logger=logging.getLogger("dotbot")
         self.logger.setLevel(logging.INFO)
         handler = logging.FileHandler(
-                filename=dir_path+'/data/logs/%sdiscord.log'%(
-                    datetime.now().strftime("[%H:%M:%S] ")
+                filename='./data/logs/%sdiscord.log'%(
+                    datetime.now().strftime("[%b %d %Y] ")
                     ),
                 encoding='utf-8',
                 mode='a'

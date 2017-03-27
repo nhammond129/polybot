@@ -4,10 +4,10 @@ sys.path.append(path.dirname(path.dirname(path.abspath(__file__))).replace("ext/
 from utils import *
 
 async def digest(message,bot):
-    if not message.channel.name=="no_one_cares":
+    if not message.channel.name=="botdev":
         return
-    if message.author.id in ["122069277758062593", "147938126269120512"]:
+    if message.content.startswith(".example"):
         await bot.send_message(
                 message.channel,
-                "no one cares"
+                "This an example command."
                 )
