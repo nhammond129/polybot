@@ -106,8 +106,6 @@ async def digest(message,bot):
                             "largest message count"
                             )
                         )
-            elif isMatch(tokens[1],"bottom"):
-                pass
         elif isMatch(tokens[0],('extensions','ext')):
             await bot.send_message(
                 message.channel,
