@@ -18,12 +18,12 @@ voice list
 if not discord.opus.is_loaded():
     discord.opus.load_opus('opus')
 VOX={
-    "gonnafun": "/home/nullspeaker/python/polybot/gonnafun.mp3",
-    "same": "/home/nullspeaker/python/polybot/same.mp3",
-    "simplememer": "/home/nullspeaker/python/polybot/simplememer.mp3",
-    "whatsinthebox": "/home/nullspeaker/python/polybot/WHATSINTHEBOX.mp3",
-    "samecanyousee": "/home/nullspeaker/python/polybot/ohsamecanyousee.mp3",
-    "moardots": "/home/nullspeaker/python/polybot/moredots.mp3"
+    "gonnafun": "/home/ec2-user/python/polybot/gonnafun.mp3",
+    "same": "/home/ec2-user/python/polybot/same.mp3",
+    "simplememer": "/home/ec2-user/python/polybot/simplememer.mp3",
+    "whatsinthebox": "/home/ec2-user/python/polybot/WHATSINTHEBOX.mp3",
+    "samecanyousee": "/home/ec2-user/python/polybot/ohsamecanyousee.mp3",
+    "moardots": "/home/ec2-user/python/polybot/moredots.mp3"
     }
 
 async def digest(message,bot):
