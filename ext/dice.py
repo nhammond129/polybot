@@ -93,7 +93,7 @@ async def digest(message,bot):
                             "`%d<%d`\nYou failed your waifu roll!"%(x,int(tokens[2]))
                             )
                     rolls-=1
-                elif len(tokens)>1 and isMatch(tokens[1],"pizza"):
+            elif len(tokens)>1 and isMatch(tokens[1],"pizza"):
                 await bot.send_message(
                         message.channel,
                         "Mmmm... tasty."
