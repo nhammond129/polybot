@@ -1,0 +1,14 @@
+PLAYER OBJECT
+	stats
+		[SP] Spellpower
+		[AP] Attack power
+		[CRIT] Critical Strike
+		[ARMOR] Armor
+		[
+		Resists
+			Nature
+			Shadow
+			Frost
+			Fire
+			Holy
+			???
