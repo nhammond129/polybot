@@ -8,16 +8,14 @@ HELP="""\
 ```bash
 help $EXTENSION
     Get the help message for $EXTENSION
+whois $NAME
+    See info about user, strict matching.
 whoami
-    NONE OF YOUR BUSINESS
+    See info about bot user.
 ping
     pong
 uptime
     Get bot uptime
-msgcount
-    See how many times Polybot has seen you shitpost
-msgcount top
-    See who Polybot has seen shitpost the most
 extensions|ext
     Get a list of loaded extensions
 ```
@@ -83,29 +81,10 @@ async def digest(message,bot):
                 "pong"
                 )
         elif isMatch(tokens[0],"uptime"):
-            bot.logger.info("DEBUG: "+bot.getUptime())
             await bot.send_message(
                 message.channel,
                 "I've been up for %s"%bot.getUptime()
                 )
-        elif isMatch(tokens[0],"msgcount"):
-            if len(tokens)<2:
-                await bot.send_message(
-                    message.channel,
-                    "I've seen you shitpost %d times."%(
-                        bot.userDB.read_userdata(
-                            message.author.id,
-                            "message count"
-                            )
-                        )
-                    )
-            if isMatch(tokens[1],"top"):
-                await bot.send_message(
-                        message.channel,
-                        "%s has shitposted the most at %d."%bot.configPO.read(
-                            "largest message count"
-                            )
-                        )
         elif isMatch(tokens[0],('extensions','ext')):
             await bot.send_message(
                 message.channel,

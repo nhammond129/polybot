@@ -11,19 +11,23 @@ HELP="""\
 ```bash
 roll xdy
     Roll x dice with y sides
-roll waifu {stat}
-roll tactical {stat}
-    Relevant 1d6 roll vs stat
+    0 < x < 101
+    2 < y < 10001
+roll waifu {stat} {rolls}
+roll tactical {stat} {rolls}
+    Relevant {rolls}d6 roll vs stat
+roll pizza
+    Why? Why would you do that?
 ```
 """
 
 
-
-
 def roll(die_string):
     q,s = map(int, die_string.split('d'))
-    if not 0<q<100:
-        q=99
+    if not 0<q<101:
+        q=100
+    if not 2<s<10001:
+        s=6
     return [random.randint(1,s) for asfd in range(q)]
 
 
@@ -33,33 +37,63 @@ async def digest(message,bot):
         tokens[0]=tokens[0][1:]
         print(tokens)
         if isMatch(tokens[0],"roll"):
-            if len(tokens)>2 and isMatch(tokens[1],"tactical"):
-                x = random.randint(1,6)
-                success=x<=int(tokens[2])
-                if success:
-                    await bot.send_message(
-                        message.channel,
-                        "`%d <= %d`\nYou succeeded your tactical roll!"%(x,int(tokens[2]))
-                        )
+            if len(tokens)>2 and isMatch(tokens[1],["tactical","t"]):
+                if len(tokens)>3:
+                    rolls=int(tokens[3])
+                    if not 0<rolls<11:
+                        rolls=1
+                    # rolls bounded above by 11, exclusive
                 else:
-                    await bot.send_message(
-                        message.channel,
-                        "`%d > %d`\nYou failed your tactical roll!"%(x,int(tokens[2]))
-                        )
-            elif len(tokens)>2 and isMatch(tokens[1],"waifu"):
-                x = random.randint(1,6)
-                success=x>=int(tokens[2])
-                if success:
-                    await bot.send_message(
-                        message.channel,
-                        "`%d >= %d`\nYou succeeded your waifu roll!"%(x,int(tokens[2]))
-                        )
+                    rolls=1
+                while rolls:
+                    x = random.randint(1,6)
+                    if x==int(tokens[2]):
+                        await bot.send_message(
+                                message.channel,
+                                "You matched your waifu stat, ask a question."
+                                )
+                        continue
+                    success=x<int(tokens[2])
+                    if success:
+                        await bot.send_message(
+                            message.channel,
+                            "`%d<%d`\nYou succeeded your tactical roll!"%(x,int(tokens[2]))
+                            )
+                    else:
+                        await bot.send_message(
+                            message.channel,
+                            "`%d>%d`\nYou failed your tactical roll!"%(x,int(tokens[2]))
+                            )
+                    rolls-=1
+            elif len(tokens)>2 and isMatch(tokens[1],["waifu","w"]):
+                if len(tokens)>3:
+                    rolls=int(tokens[3])
+                    if not 0<rolls<11:
+                        rolls=1
+                    # rolls bounded above by 11, exclusive
                 else:
-                    await bot.send_message(
-                        message.channel,
-                        "`%d < %d`\nYou failed your waifu roll!"%(x,int(tokens[2]))
-                        )
-            elif len(tokens)>1 and isMatch(tokens[1],"pizza"):
+                    rolls=1
+                while rolls:
+                    x = random.randint(1,6)
+                    if x==int(tokens[2]):
+                        await bot.send_message(
+                                message.channel,
+                                "You matched your waifu stat, ask a question."
+                                )
+                        continue
+                    success=x>int(tokens[2])
+                    if success:
+                        await bot.send_message(
+                            message.channel,
+                            "`%d>%d`\nYou succeeded your waifu roll!"%(x,int(tokens[2]))
+                            )
+                    else:
+                        await bot.send_message(
+                            message.channel,
+                            "`%d<%d`\nYou failed your waifu roll!"%(x,int(tokens[2]))
+                            )
+                    rolls-=1
+                elif len(tokens)>1 and isMatch(tokens[1],"pizza"):
                 await bot.send_message(
                         message.channel,
                         "Mmmm... tasty."

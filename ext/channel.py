@@ -9,7 +9,7 @@ HELP="""\
 channel purge
     Purge the channel -- owner only
     NOTE: only works if bot is a mod
-channel createdat
+channel created-at
     See when the channel was created
 ```
 """
