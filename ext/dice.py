@@ -50,7 +50,7 @@ async def digest(message,bot):
                     if x==int(tokens[2]):
                         await bot.send_message(
                                 message.channel,
-                                "You matched your waifu stat, ask a question."
+                                "`%d=%d` You matched your waifu stat, ask a question."%(int(tokens[2]),int(tokens[2]))
                                 )
                         continue
                     success=x<int(tokens[2])
@@ -78,7 +78,7 @@ async def digest(message,bot):
                     if x==int(tokens[2]):
                         await bot.send_message(
                                 message.channel,
-                                "You matched your waifu stat, ask a question."
+                                "`%d=%d` You matched your waifu stat, ask a question."%(int(tokens[2]),int(tokens[2]))
                                 )
                         continue
                     success=x>int(tokens[2])
