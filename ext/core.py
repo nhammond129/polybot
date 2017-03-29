@@ -8,6 +8,8 @@ HELP="""\
 ```bash
 help $EXTENSION
     Get the help message for $EXTENSION
+invite
+    Post the link for inviting the bot to a server.
 whois $NAME
     See info about user, strict matching.
 whoami
@@ -44,6 +46,11 @@ async def digest(message,bot):
                         message.channel,
                         hlpmsg
                         )
+        elif isMatch(tokens[0],"invite"):
+            await bot.send_message(
+                message.channel,
+                "https://discordapp.com/oauth2/authorize?&client_id=233829317245796352&scope=bot&permissions=0"
+                )
         elif isMatch(tokens[0],"whois"):
             target = message.server.get_member_named(tokens[1])
             await bot.send_message(
