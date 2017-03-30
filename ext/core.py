@@ -10,6 +10,8 @@ help $EXTENSION
     Get the help message for $EXTENSION
 invite
     Post the link for inviting the bot to a server.
+github
+    Post the link for the Github repo of this bot.
 whois $NAME
     See info about user, strict matching.
 whoami
@@ -50,6 +52,11 @@ async def digest(message,bot):
             await bot.send_message(
                 message.channel,
                 "https://discordapp.com/oauth2/authorize?&client_id=233829317245796352&scope=bot&permissions=0"
+                )
+        elif isMatch(tokens[0],"github"):
+            await bot.send_message(
+                message.channel,
+                "https://github.com/Nullspeaker/polybot/"
                 )
         elif isMatch(tokens[0],"whois"):
             target = message.server.get_member_named(tokens[1])
