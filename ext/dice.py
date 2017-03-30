@@ -9,7 +9,7 @@ import random
 HELP="""\
 `ext.dice`
 ```bash
-roll xdy
+roll {x}d{y}
     Roll x dice with y sides
     0 < x < 101
     2 < y < 10001
