@@ -29,6 +29,7 @@ async def digest(message,bot):
                     )
                 )
     # Logging ends. Put the rest of this in another module?
+    ''''
     said=bot.userDB.read_userdata(
             message.author.id,
             "said"
@@ -41,4 +42,9 @@ async def digest(message,bot):
             "said",
             said
             )
-
+    '''
+    bot.userDB.write_userdata(
+            message.author.id,
+            "said",
+            []
+            )
