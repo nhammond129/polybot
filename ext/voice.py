@@ -23,6 +23,7 @@ VOX={
     "simplememer": "/home/ec2-user/polybot/simplememer.mp3",
     "whatsinthebox": "/home/ec2-user/polybot/WHATSINTHEBOX.mp3",
     "samecanyousee": "/home/ec2-user/polybot/ohsamecanyousee.mp3",
+    "snout": "/home/ec2-user/polybot/snout.mp3",
     "moardots": "/home/ec2-user/polybot/moredots.mp3"
     }
 
