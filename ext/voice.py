@@ -50,10 +50,8 @@ async def digest(message,bot):
                 if bot.is_voice_connected(
                         message.channel.server
                         ):
-                    if not bot.voice_channel == message.author.voice_channel:
-                        await bot.join_voice_channel(
-                                message.author.voice_channel
-                                )
+                    vc = bot.voice_client_in(message.channel.server)
+                    vc.move_to(message.author.voice_channel)
                 else:
                     await bot.join_voice_channel(
                             message.author.voice_channel
