@@ -51,7 +51,7 @@ def pdStrategy(bot,user): # true = cooperate, false = defect
         return True # cooperate first
 
     if last is True:
-        if random.random() < (nice / (1+naughty+nice))/2:
+        if random.random() < (1.25*nice / (1+naughty+nice)):
             return False # abuse them if they're really nice, sometimes.
         return True # just cooperate if they did
     else:
@@ -157,8 +157,8 @@ async def digest(message,bot):
                 await bot.send_message(
                     message.channel,
                     "You've scored a total `%d` out of `%d` iterations,"%(plyScore,plyIters) +
-                    "for an average score of `%d`.\n"%(plyScore/((plyIters==0)+plyIters),) +
-                    "I scored an average of `%d` over `%d` iterations."%(botScore/((botIters==0)+botIters),botIters)
+                    "for an average score of `%2.f`.\n"%(plyScore/((plyIters==0)+plyIters),) +
+                    "I scored an average of `%2.f` over `%d` iterations."%(botScore/((botIters==0)+botIters),botIters)
                     )
         else:
             await bot.send_message(
