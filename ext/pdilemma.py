@@ -126,6 +126,9 @@ async def digest(message,bot):
                 setData(bot,botuser,"score",botScore)
                 setData(bot,botuser,"iterations",botIterations)
 
+                if botThrow: botThrowWord = "cooperated"
+                else: botThrowWord = "defected"
+
                 await bot.send_message(
                         message.channel,
                         "I %s, you defected.\n"%(botThrowWord,) +
