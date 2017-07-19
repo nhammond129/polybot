@@ -106,6 +106,7 @@ async def digest(message,bot):
 
             elif isMatch(tokens[1],("defect","d","def")):
                 botThrow = pdStrategy(bot,user)
+                payout = getPayout(botThrow,False)
 
                 plyScore = getData(bot,user,"score")
                 plyIters = getData(bot,user,"iterations")
