@@ -153,8 +153,8 @@ async def digest(message,bot):
                 await bot.send_message(
                     message.channel,
                     "You've scored a total `%d` out of `%d` iterations,"%(plyScore,plyIters) +
-                    "for an average score of `%d`.\n"%(plyScore/plyIters,) +
-                    "I scored an average of `%d` over `%d` iterations."%(botScore/botIters,botIters)
+                    "for an average score of `%d`.\n"%(plyScore/((plyIters==0)+plyIters),) +
+                    "I scored an average of `%d` over `%d` iterations."%(botScore/((botIters==0)+botIters),botIters)
                     )
         else:
             await bot.send_message(
