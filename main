@@ -11,46 +11,47 @@ client=polybot.Bot()
 ## Define event triggers
 @client.event
 async def on_ready():
-        client.logger.info("Logged in as:\n\t%s\n\t%s"%(client.user.name,client.user.id))
+		client.logger.info("Logged in as:\n\t%s\n\t%s"%(client.user.name,client.user.id))
 
 @client.event
 async def on_member_join(member):
-        server = member.server
-        fmt = 'Welcome {0.mention} to {1.name}!'
-        await client.send_message(server, fmt.format(member,server))
+		server = member.server
+		fmt = 'Welcome {0.mention} to {1.name}!'
+		await client.send_message(server, fmt.format(member,server))
 
 @client.event
 async def on_message(message):
-    await client.message_handler(message)
+	await client.message_handler(message)
 
 ## Define background task
 async def check_amadeus_down():
-    await client.wait_until_ready()
-    AmadeusHome=None
-    BirchUser=None
-    for server in client.servers:
-        if server.name=="¯\\_(ツ)_/¯":
-            AmadeusHome=server
-            break
-    BirchUser=AmadeusHome.get_member_named("QwertyThePie#1615")
-    AmadeusUser=AmadeusHome.get_member_named("Amadeus#7338")
-    adj=0
-    while not client.is_closed:
-        if(str(AmadeusUser.status)=="offline"):
-            await client.send_message(BirchUser,"bot is kil plz fix")
-            adj=adj+3600
-            if adj>10800:
-                adj=10800
-        else:
-            adj=0
-        await asyncio.sleep(600+adj)
+	await client.wait_until_ready()
+	AmadeusHome=None
+	BirchUser=None
+	for server in client.servers:
+		if server.name.startswith("¯\\_(") and server.name.endswith(")_/¯"):
+			AmadeusHome=server
+			break
+	if not AmadeusHome is None:
+		BirchUser=AmadeusHome.get_member_named("Nullspeaker#3390")
+		AmadeusUser=AmadeusHome.get_member_named("Amadeus#7338")
+		adj=0
+		while not client.is_closed:
+			if(str(AmadeusUser.status)=="offline"):
+				await client.send_message(BirchUser,"bot is kil plz fix")
+				adj=adj+3600
+				if adj>10800:
+					adj=10800
+			else:
+				adj=0
+			await asyncio.sleep(600+adj)
 
 if __name__=="__main__":
-    mydir=os.path.dirname(os.path.realpath(__file__))
-    with open(mydir+"/.token","r") as f:
-        t=f.read()[:-1]
-        print("Token ending in: \"%s\""%(t[-8:]))
+	mydir=os.path.dirname(os.path.realpath(__file__))
+	with open(mydir+"/.token","r") as f:
+		t=f.read()[:-1]
+		print("Token ending in: \"%s\""%(t[-8:]))
 
-        client.loop.create_task(check_amadeus_down())
+		client.loop.create_task(check_amadeus_down())
 
-        client.run(t)
+		client.run(t)

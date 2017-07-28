@@ -3,55 +3,47 @@ import os
 import logging
 import shlex
 
+logger = logging.getLogger("polybot")
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
 class InvalidFileIO(Exception):
-    pass
+	pass
 
-class PersistenceObject:
-    def __init__(self,filename):
-        self.logger = logging.getLogger("dotbot")
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-        self.filepath=dir_path+"/data/"+filename
+def getData(filename,key):
+	with shelve.open(dir_path+"/data/"+filename) as db:
+		db.sync()
+		if key in db.keys():
+			return db[key]
+		else:
+			return None
 
-    def read(self,key):
-        with shelve.open(self.filepath) as db:
-            db.sync()
-            if key in db.keys():
-                return db[key]
-            else:
-                return None
+def setData(filename,key,value):
+	with shelve.open(dir_path+"/data/"+filename,writeback=True) as db:
+		db[key]=value
+		db.sync()
 
-    def write(self,key,value):
-        with shelve.open(self.filepath,writeback=True) as db:
-            db[key]=value
-            db.sync()
 
-class UserDB():
-    def __init__(self,directory="/data/users/"):
-        self.logger = logging.getLogger("dotbot")
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-        self.path=dir_path+directory
+def getUserData(ID,key):
+	with shelve.open(dir_path+"/data/users/"+ID+".user") as db:
+		db.sync()
+		if key in db.keys():
+			return db[key]
+		else:
+			return None
 
-    def read_userdata(self,ID,key):
-        with shelve.open(self.path+ID+".user") as db:
-            db.sync()
-            if key in db.keys():
-                return db[key]
-            else:
-                return None
-
-    def write_userdata(self,ID,key,value):
-        with shelve.open(self.path+ID+".user",writeback=True) as db:
-            db[key]=value
-            db.sync()
+def setUserData(ID,key,value):
+	with shelve.open(dir_path+"/data/users/"+ID+".user",writeback=True) as db:
+		db[key]=value
+		db.sync()
 
 def tokenize(message):
-    return shlex.split(message.content)
+	return shlex.split(message.content)
 
 def isMatch(s1,s2):
-    if type(s2) in (list,tuple):
-        return s1.lower() in [k.lower() for k in s2]
-    else:
-        return s1.lower() == s2.lower()
+	if type(s2) in (list,tuple):
+		return s1.lower() in [k.lower() for k in s2]
+	else:
+		return s1.lower() == s2.lower()
 
 def isOwner(message):
-    return message.author.id=="152273482846175234"
+	return message.author.id=="152273482846175234"

@@ -1,7 +1,5 @@
 import discord
-
 import utils
-
 import asyncio
 import sys
 import os
@@ -15,6 +13,20 @@ import logging
 # Fix relative paths
 sys.path.append(os.path.realpath('..'))
 
+def ensure_dir(directory):
+	if not os.path.exists(directory):
+		print(directory)
+		os.makedirs(directory)
+
+ensured_dirs=[
+	"./data",
+	"./data/logs",
+	"./data/media",
+	"./data/users"
+	]
+for d in ensured_dirs:
+	ensure_dir(d)
+
 class Bot(discord.Client):
     def __init__(self,
             commandPrefix=['~','!','#','/',':','-','?',';','|','.'],
@@ -24,14 +36,14 @@ class Bot(discord.Client):
 
         self.startTime=time.time()
 
-        self.logger=logging.getLogger("dotbot")
+        self.logger=logging.getLogger("polybot")
         self.logger.setLevel(logging.INFO)
         handler = logging.FileHandler(
                 filename='./data/logs/%sdiscord.log'%(
                     datetime.now().strftime("[%b %d %Y] ")
                     ),
                 encoding='utf-8',
-                mode='a'
+                mode='a+'
                 )
         handler.setFormatter(logging.Formatter(
             '%(asctime)s [%(levelname)s] : %(message)s',
@@ -44,13 +56,6 @@ class Bot(discord.Client):
             datefmt="[%d/%m/%y %H:%M:%S]"
             ))
         self.logger.addHandler(handler)
-
-        self.userDB=utils.UserDB()
-        self.gameDB=utils.PersistenceObject("gamedata.dat")
-        self.fridgeDB=utils.PersistenceObject("fridge.dat")
-        self.configPO=utils.PersistenceObject("config.dat")
-
-        self.tempvars={}
 
         self.commandPrefix=commandPrefix
 

@@ -50,14 +50,16 @@ async def digest(message,bot):
         tokens=tokenize(message)
         tokens[0]=tokens[0][1:]
         if isMatch(tokens[0],"fridge"):
-            userfridges=bot.userDB.read_userdata(
+            userfridges=getUserData(
                     message.author.id,
                     "fridges"
                     )
-            serverfridge=bot.fridgeDB.read(
+            serverfridge=getData(
+					"fridge.dat",
                     str(message.server.id)
                     )
-            channelfridge=bot.fridgeDB.read(
+            channelfridge=getData(
+					"fridge.dat",
                     str(message.server.id)+str(message.channel.id)
                     )
 
@@ -251,16 +253,18 @@ async def digest(message,bot):
                         userfridges.pop(whichUserFridge,None)
             else:
                 pass
-            bot.userDB.write_userdata(
+            setUserData(
                     message.author.id,
                     "fridges",
                     userfridges
                     )
-            bot.fridgeDB.write(
+            setData(
+					"fridge.dat",
                     str(message.server.id),
                     serverfridge
                     )
-            bot.fridgeDB.write(
+            setData(
+					"fridge.dat",
                     str(message.server.id)+str(message.channel.id),
                     channelfridge
                     )
