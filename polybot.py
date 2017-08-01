@@ -24,7 +24,7 @@ ensured_dirs=[
 	"./data/media",
 	"./data/users"
 	]
-for d in ensured_dirs:
+for d in ensured_dirs: # make sure some directories exist
 	ensure_dir(d)
 
 class Bot(discord.Client):
@@ -34,11 +34,12 @@ class Bot(discord.Client):
             ):
         super().__init__(**options)
 
-        self.startTime=time.time()
+        self.startTime=time.time() # for uptime checking
 
+		# setup logging
         self.logger=logging.getLogger("polybot")
         self.logger.setLevel(logging.INFO)
-        handler = logging.FileHandler(
+        handler = logging.FileHandler( # log to file
                 filename='./data/logs/%sdiscord.log'%(
                     datetime.now().strftime("[%b %d %Y] ")
                     ),
@@ -50,7 +51,7 @@ class Bot(discord.Client):
             datefmt="[%d/%m/%y %H:%M:%S]"
             ))
         self.logger.addHandler(handler)
-        handler = logging.StreamHandler()
+        handler = logging.StreamHandler() # log to stdout
         handler.setFormatter(logging.Formatter(
             '%(asctime)s [%(levelname)s] : %(message)s',
             datefmt="[%d/%m/%y %H:%M:%S]"
@@ -58,16 +59,19 @@ class Bot(discord.Client):
         self.logger.addHandler(handler)
 
         self.commandPrefix=commandPrefix
-
         self.extensions={}
         self.load_all_extensions()
 
     async def message_handler(self,message):
+		# heart and soul: for each extension, handle the new message.
         for ext in self.extensions.values():
             await ext.digest(message,self)
 
     def getUptime(self):
         return str(timedelta(seconds=(time.time()-self.startTime)))
+
+	# warning: literal h*ckin magic beyond this point.
+	# I don't really know why it works, exactly. Or why it's not 100% working, either.
 
     def load_extension(self,extname):
         if extname in self.extensions:

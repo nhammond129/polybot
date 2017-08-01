@@ -28,17 +28,18 @@ async def check_amadeus_down():
 	await client.wait_until_ready()
 	AmadeusHome=None
 	BirchUser=None
-	for server in client.servers:
+	for server in client.servers: # find shruggiechat server
 		if server.name.startswith("¯\\_(") and server.name.endswith(")_/¯"):
 			AmadeusHome=server
 			break
-	if not AmadeusHome is None:
+	if not AmadeusHome is None: # if found, grab users from member list
 		BirchUser=AmadeusHome.get_member_named("Nullspeaker#3390")
 		AmadeusUser=AmadeusHome.get_member_named("Amadeus#7338")
 		adj=0
-		while not client.is_closed:
+		while not client.is_closed: # loop and check if amadeus bot is ded
 			if(str(AmadeusUser.status)=="offline"):
 				await client.send_message(BirchUser,"bot is kil plz fix")
+				# if messaged, wait longer to avoid spam.
 				adj=adj+3600
 				if adj>10800:
 					adj=10800
@@ -53,5 +54,4 @@ if __name__=="__main__":
 		print("Token ending in: \"%s\""%(t[-8:]))
 
 		client.loop.create_task(check_amadeus_down())
-
 		client.run(t)
