@@ -1,7 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.dat
-data/
 data/*.dat
 data/logs/*
 data/users/*

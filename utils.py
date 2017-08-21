@@ -10,7 +10,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 # IO Helper functions
 class InvalidFileIO(Exception):
 	pass
-def getData(filename,key):
+def getData(filename,key): # TODO: encrypt user data
 	with shelve.open(dir_path+"/data/"+filename) as db:
 		db.sync()
 		if key in db.keys():
