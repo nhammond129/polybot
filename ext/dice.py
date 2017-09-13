@@ -104,7 +104,7 @@ async def digest(message,bot):
                     while (x[0]==x[1]):
                         x = str(random.randint(10,99))
                     await bot.send_message(
-                        messag.channel,
+                        message.channel,
                         "You rolled: `%s`\nNo dubs"%(x,)
                     )
                 else:
@@ -116,7 +116,7 @@ async def digest(message,bot):
                         )
                     else:
                         await bot.send_message(
-                            messag.channel,
+                            message.channel,
                             "You rolled: `%s`\nNo dubs"%(x,)
                         )
             else:
