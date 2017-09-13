@@ -98,6 +98,27 @@ async def digest(message,bot):
                         message.channel,
                         "Mmmm... tasty."
                         )
+            elif isMatch(tokens[0],"checkem"):
+                if (message.author.id=="147938126269120512"):
+                    x = str(random.randint(10,99))
+                    while (x[0]==x[1]):
+                        x = str(random.randint(10,99))
+                    await bot.send_message(
+                        messag.channel,
+                        "You rolled: `%s`\nNo dubz"%(x,)
+                    )
+                else:
+                    x = str(random.randint(10,99))
+                    if (x[0]==x[1]):
+                        await bot.send_message(
+                            message.channel,
+                            "You rolled: `%s`\nhttp://i.imgur.com/9GJbtBy.jpg"%(x,)
+                        )
+                    else:
+                        await bot.send_message(
+                            messag.channel,
+                            "You rolled: `%s`\nNo dubz"%(x,)
+                        )
             else:
                 r=roll(tokens[1])
                 await bot.send_message(
