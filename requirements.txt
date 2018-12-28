@@ -18,5 +18,5 @@ pyxdg==0.25
 requests==2.20.0
 six==1.10.0
 team==1.0
-urllib3==1.21.1
+urllib3>=1.23
 websockets==3.3
